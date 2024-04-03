@@ -4,12 +4,14 @@ import CardList from './components/CardList'
 import AppRouter from './routes/AppRouter'
 import './App.css'
 import SearchBar from './components/SearchBar'
+import {Toaster} from 'react-hot-toast'
 
 function App() {
 
   return (
     <>
       <AppRouter/>
+      <Toaster/>
     </>
   )
 }

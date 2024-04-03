@@ -10,7 +10,6 @@ const Home = () =>{
     <>
       <NavBar/>
       <Contenedor>
-        <SearchBar/>
         <CardList/>
       </Contenedor>
     </>
