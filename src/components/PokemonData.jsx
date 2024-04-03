@@ -17,8 +17,7 @@ const PokemonData = () =>{
     const response = await fetch(`http://localhost:8080/pokeapi/v1/find/${id}`)
     if(response.status===200){
       const data = await response.json()
-      setPokemon(data)
-      console.log(data)
+      setPokemon(data.data)
     }else{
       console.log("error")
     }

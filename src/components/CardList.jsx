@@ -6,36 +6,16 @@ import Card from "./Card";
 const CardList = () =>{
 
   const [pokemons, setPokemons] = useState([])
-  const [mostrar, setMostrar] = useState(pokemons)
+  const [mostrar, setMostrar] = useState([])
   const navigate = useNavigate()
   const inputRef = useRef()
 
-  const tiposPokemon = {
-    normal: "#A8A878",
-    fuego: "#F08030",
-    agua: "#6890F0",
-    planta: "#78C850",
-    electrico: "#F8D030",
-    hielo: "#98D8D8",
-    lucha: "#C03028",
-    veneno: "#A040A0",
-    tierra: "#E0C068",
-    volador: "#A890F0",
-    psiquico: "#F85888",
-    bicho: "#A8B820",
-    roca: "#B8A038",
-    fantasma: "#705898",
-    dragon: "#7038F8",
-    siniestro: "#705848",
-    acero: "#B8B8D0",
-    hada: "#EE99AC"
-  };
   const obtenerPokemons = async  () =>{
     const response = await fetch("http://localhost:8080/pokeapi/v1/findAll")
     if(response.status===200){
       const data = await response.json()
-      setPokemons(data)
-      setMostrar(data)
+      setPokemons(data.data)
+      setMostrar(data.data)
     }  }
 
 

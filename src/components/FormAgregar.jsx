@@ -1,6 +1,6 @@
 import React from "react";
 import {AnimatePresence,motion} from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { toast } from "react-hot-toast";
 
@@ -13,7 +13,7 @@ const FormAgregar = () =>{
   const regionRef = useRef()
   const tipoRef = useRef()
   const imagenRef = useRef()
-  const location = useLocation()
+  const navigate = useNavigate()
 
   //Llamada a la api
   const añadirPokemon = async () =>{
@@ -52,6 +52,7 @@ const FormAgregar = () =>{
           secondary: '#fff',
         },
       });
+      navigate("/")
     }else{
       console.log(data)
       toast(data.message, {
@@ -89,11 +90,11 @@ const FormAgregar = () =>{
           añadirPokemon()
         }}>
           <div className="flex flex-row gap-6 mb-4">
-            <input ref={nombreRef} type="text" placeholder="Nombre" class="input input-bordered w-full max-w-xs" />
-            <input ref={alturaRef} type="text" placeholder="Altura en metros" className="input input-bordered w-full max-w-xs" />
+            <input ref={nombreRef} required type="text" placeholder="Nombre" class="input input-bordered w-full max-w-xs" />
+            <input ref={alturaRef} required type="text" placeholder="Altura en metros" className="input input-bordered w-full max-w-xs" />
           </div>
-          <input ref={pesoRef} type="text" placeholder="Peso en Kilos" className="input input-bordered w-full mb-4" />
-          <select ref={regionRef} className="select select-bordered w-full mb-4">
+          <input ref={pesoRef} required type="text" placeholder="Peso en Kilos" className="input input-bordered w-full mb-4" />
+          <select ref={regionRef} required className="select select-bordered w-full mb-4">
             <option>Selecciona la región</option>
             <option value={"Kanto"} >Kanto</option>
             <option value={"Johto"}  >Johto</option>
@@ -107,7 +108,7 @@ const FormAgregar = () =>{
           </select>
           <div className="flex flex-col mb-4">
             <label className="text-base mb-2">Selecciona máximo 3 tipos</label>
-            <select ref={tipoRef} multiple className="select select-bordered w-full ">
+            <select ref={tipoRef} required multiple className="select select-bordered w-full ">
               <option value={"Bicho"}>Bicho</option>
               <option value={"Dragon"}>Dragón</option>
               <option value={"Electrico"}>Eléctrico</option>
@@ -129,7 +130,7 @@ const FormAgregar = () =>{
           </div>
           <div className="flex flex-col mb-4">
             <label className="text-base mb-2">Selecciona la imagen</label>
-            <input ref={imagenRef} type="file" className="file-input file-input-bordered w-full " />
+            <input ref={imagenRef} required type="file" className="file-input file-input-bordered w-full " />
           </div>
           <motion.button whileTap={{ scale: 0.8 }} className="cursor-pointer p-2 rounded-md bg-white text-black w-full">
             <input className={"cursor-pointer"} type={"submit"}/>

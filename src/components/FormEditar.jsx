@@ -35,16 +35,16 @@ const FormEditar = () =>{
     const response = await fetch(`http://localhost:8080/pokeapi/v1/find/${id}`)
     if(response.status===200){
       const data = await response.json()
-      nombreRef.current.value=data.nombre
-      alturaRef.current.value=data.altura
-      pesoRef.current.value=data.peso
-      regionRef.current.value=data.region
+      nombreRef.current.value=data.data.nombre
+      alturaRef.current.value=data.data.altura
+      pesoRef.current.value=data.data.peso
+      regionRef.current.value=data.data.region
       Array.from(tipoRef.current.options).forEach(option => {
-        option.selected = data.tipos.includes(option.value);
-        console.log(data.tipos.includes(option.value))
+        option.selected = data.data.tipos.includes(option.value);
+        console.log(data.data.tipos.includes(option.value))
       });
-      setImagenURL(data.sprite)
-      console.log(data)
+      setImagenURL(data.data.sprite)
+      console.log(data.data)
     }else{
       console.log("error")
     }
@@ -134,11 +134,11 @@ toast('¡', {
           editarPokemon()
         }}>
           <div className="flex flex-row gap-6 mb-4">
-            <input ref={nombreRef} type="text" placeholder="Nombre" class="input input-bordered w-full max-w-xs" />
-            <input ref={alturaRef} type="text" placeholder="Altura en metros" className="input input-bordered w-full max-w-xs" />
+            <input ref={nombreRef} required type="text" placeholder="Nombre" class="input input-bordered w-full max-w-xs" />
+            <input ref={alturaRef} required type="text" placeholder="Altura en metros" className="input input-bordered w-full max-w-xs" />
           </div>
-          <input ref={pesoRef} type="text" placeholder="Peso en Kilos" className="input input-bordered w-full mb-4" />
-          <select ref={regionRef} className="select select-bordered w-full mb-4">
+          <input ref={pesoRef} required type="text" placeholder="Peso en Kilos" className="input input-bordered w-full mb-4" />
+          <select ref={regionRef} required className="select select-bordered w-full mb-4">
             <option>Selecciona la región</option>
             <option value={"Kanto"} >Kanto</option>
             <option value={"Johto"}  >Johto</option>
@@ -152,7 +152,7 @@ toast('¡', {
           </select>
           <div className="flex flex-col mb-4">
             <label className="text-base mb-2">Selecciona máximo 3 tipos</label>
-            <select ref={tipoRef} multiple className="select select-bordered w-full ">
+            <select ref={tipoRef} required multiple className="select select-bordered w-full ">
               <option value={"Agua"}>Agua</option>
               <option value={"Acero"}>Acero</option>
               <option value={"Bicho"}>Bicho</option>
